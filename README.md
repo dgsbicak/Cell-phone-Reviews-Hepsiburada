@@ -247,6 +247,7 @@ print(classification_report(label_test, preds_sgd))
 #log_loss=0.75
 #F1: 0.73
 ```
+![resim](https://user-images.githubusercontent.com/23128332/43603382-78c494c6-969b-11e8-9536-94c38b80a340.png)
 
 # Pipeline Method
 ```
