@@ -364,7 +364,7 @@ model = Sequential()
 model.add(Dense(100,input_shape=(vocab_size,),activation='tanh')),  # tanh biraz daha iyi sonuç verdi reluya göre.
 model.add(Dense(100, activation='tanh')),
 model.add(Dense(100, activation='tanh')),
-model.add(Dense(5, activation='softmax')) # dense 4 idi, onu 5 yapınca oldu.
+model.add(Dense(5, activation='softmax'))
 
 model.compile(Adam(lr=0.04), 'categorical_crossentropy', metrics=['accuracy'])
 model.summary()
