@@ -220,7 +220,6 @@ And people who are in 35-44 age segment are more likely to prefer Samsung mobile
 **But, we need to make statistical tests to be more certain.**
 
 
-
 # Vectorization
 ### CountVectorizer
 ```
@@ -244,4 +243,84 @@ print('Valid RMSLE: {:.4f}'.format(np.sqrt(mean_squared_log_error(label_test, pr
 print(confusion_matrix(label_test, preds_sgd))
 print('\n')
 print(classification_report(label_test, preds_sgd))
+#RMSLE: 0.2493,
+#log_loss=0.75
+#F1: 0.73
+```
+
+# Pipeline Method
+```
+feature_train, feature_test, label_train, label_test = train_test_split(X, y, test_size=0.33, shuffle=True)
+
+pipeline = Pipeline([
+    ('vect', CountVectorizer()),                   # strings to token integer counts
+    #('tfidf', TfidfVectorizer()),                 # integer counts to weighted TF-IDF scores
+    #('clf', MultinomialNB()),                     # train on TF-IDF vectors w/ Naive Bayes classifier
+    ('clf', SGDClassifier(loss="log")), #  RMSLE: 0.2493, F1: 0.73, log_loss=0.75
+    #('clf', SVC(C=10,gamma=0.01)),                #F1: 0.74 
+    #('clf',Lasso(alpha=0.1)),  # RMSLE: 0.2407, continuous predictions
+    #('clf',LogisticRegression()),  # RMSLE: 0.2412, F1: 0.75
+    #('clf',SGDRegressor()),  # RMSLE: 0.2321
+    #('clf',Perceptron()),   # RMSLE: 0.2523, F1: 0.73
+    #('clf',PassiveAggressiveClassifier()),  # RMSLE: 0.2412, F1:0.73
+    #('clf',ElasticNet()),  # RMSLE: 0.2713
+])
+
+pipeline.fit(feature_train, label_train)
+preds = pipeline.predict(feature_test)
+from sklearn.metrics import confusion_matrix, classification_report
+print('Valid RMSLE: {:.4f}'.format(np.sqrt(mean_squared_log_error(label_test, preds))))
+print(confusion_matrix(label_test, preds))
+print('\n')
+print(classification_report(label_test, preds))
+
+preds_proba = pipeline.predict_proba(feature_test)
+print("F1_score : {:.2%} ".format(f1_score(label_test, preds, average='micro')))  # 'samples', 'weighted', 'macro', 'micro', 'binary'
+print("Log_loss : {:.4f} ".format(log_loss(label_test, preds_proba)))
+```
+```
+Valid RMSLE: 0.2573
+[[  85   15   50   31  109]
+ [  21   41   54   45  108]
+ [  30   20  299  182  941]
+ [   5   13  147 1152 1298]
+ [   7    7  136  292 9537]]
+
+
+             precision    recall  f1-score   support
+
+         20       0.57      0.29      0.39       290
+         40       0.43      0.15      0.22       269
+         60       0.44      0.20      0.28      1472
+         80       0.68      0.44      0.53      2615
+        100       0.80      0.96      0.87      9979
+
+avg / total       0.73      0.76      0.73     14625
+
+F1_score : 75.99% 
+Log_loss : 0.7767 
+```
+
+# GridSearch Medhod, Parameter Optimization
+```
+from sklearn.model_selection import GridSearchCV
+import logging
+from sklearn.svm import SVC
+
+pipeline = Pipeline([
+    ('vect', CountVectorizer()),
+    #('tfidf', TfidfVectorizer()),
+    ('clf', SVC()),
+])
+
+def svc_param_tuning(X, y,pipeline):
+    param_grid = dict(clf__C = (10,20,30,40),
+                      clf__gamma = (0.01,0.01,),)
+    grid_search = GridSearchCV(pipeline, param_grid, n_jobs=3, verbose=1)
+    grid_search.fit(X, y)
+    grid_search.best_params_
+    return grid_search.best_params_
+print(svc_param_tuning(feature_train,label_train,pipeline=pipeline))
+
+#Optimum: {'clf__C': 10, 'clf__gamma': 0.01}
 ```
