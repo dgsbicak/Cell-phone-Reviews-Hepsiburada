@@ -325,3 +325,78 @@ print(svc_param_tuning(feature_train,label_train,pipeline=pipeline))
 # Optimum: {'clf__C': 10, 'clf__gamma': 0.01}
 # F1 score: 0.74 
 ```
+
+# Deep Learning with Keras Framework
+### Making of Generators
+```
+import keras as ks
+from keras.preprocessing.text import Tokenizer
+
+# 4 news groups
+num_labels = 4
+vocab_size = 40000
+batch_size = 100
+
+t = Tokenizer(num_words=vocab_size)
+t.fit_on_texts(data['Text'])
+
+encoded_docs = t.texts_to_matrix(data['Text'], mode='tfidf')
+```
+```
+from sklearn.preprocessing import LabelEncoder
+encoder=LabelEncoder()
+y1=encoder.fit_transform(data['Rating'])
+Y = pd.get_dummies(y1).values
+```
+
+```from sklearn.model_selection import train_test_split
+# Memory Error Problem
+feature_train, feature_test, label_train, label_test = train_test_split(encoded_docs, Y,
+                                                                        test_size=0.4, random_state=10,shuffle=False)
+```
+```
+from keras.models import Sequential
+from keras.layers import Dense
+from keras.optimizers import SGD, Adam
+
+model = Sequential()
+model.add(Dense(100,input_shape=(vocab_size,),activation='tanh')),  # tanh biraz daha iyi sonuç verdi reluya göre.
+model.add(Dense(100, activation='tanh')),
+model.add(Dense(100, activation='tanh')),
+model.add(Dense(5, activation='softmax')) # dense 4 idi, onu 5 yapınca oldu.
+
+model.compile(Adam(lr=0.04), 'categorical_crossentropy', metrics=['accuracy'])
+model.summary()
+```
+
+```
+model.fit(feature_train, label_train,
+          batch_size=batch_size,
+          epochs=30, verbose=1,
+          validation_split=0.1)
+```
+
+```
+y_pred=model.predict(feature_test)
+y_test_class = np.argmax(label_test,axis=1)
+y_pred_class = np.argmax(y_pred,axis=1)
+from sklearn.metrics import confusion_matrix, classification_report
+print(confusion_matrix(y_test_class, y_pred_class))
+print(classification_report(y_test_class, y_pred_class))
+```
+```
+[[   24    72    59   121   182]
+ [   12    56    31   126   140]
+ [   24    93   161   547  1246]
+ [    6    46    57  1259  2200]
+ [    3    44   118   890 10210]]
+             precision    recall  f1-score   support
+
+          0       0.35      0.05      0.09       458
+          1       0.18      0.15      0.17       365
+          2       0.38      0.08      0.13      2071
+          3       0.43      0.35      0.39      3568
+          4       0.73      0.91      0.81     11265
+
+avg / total       0.61      0.66      0.61     17727
+```
