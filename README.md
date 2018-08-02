@@ -73,39 +73,6 @@ def zeroage(x):
 df['Age'] = df['Age'].map(zeroage)
 ```
 
-# Descriptive Analysis 
-#### Age Distribution
-```
-plt.subplots(figsize=(16,8))
-sns.distplot(df['Age'].dropna(), bins=100)
-plt.savefig('agedist1.png')
-```
-![agedist1](https://user-images.githubusercontent.com/23128332/41202223-84eb53e4-6cce-11e8-8f5c-d97ec50eb828.png)
-
-#### Reviewer Gender Difference
-Genders were predicted according to reviewers' names. Some names doesn't have different gender attributes on them. They are indicated as 'Unisex' or in other words, unknown gender information.
-![genderplot1](https://user-images.githubusercontent.com/23128332/41202327-4adc5e76-6cd0-11e8-9555-7a7c6f2362f7.png)
-
-#### Brand Ratings According to Genders
-![heatgenderrating2](https://user-images.githubusercontent.com/23128332/41202224-850c9e82-6cce-11e8-9a94-268f44ef1f04.png)
-
-#### Brand Ratings 
-```
-plt.subplots(figsize=(16,8))
-plt.xticks(rotation=45)
-sns.barplot(x=df['Brand'], y=df['Rating'], data=df)
-plt.savefig('barplot1.png')
-```
-![barplot1](https://user-images.githubusercontent.com/23128332/41202328-4af929ca-6cd0-11e8-89f0-a0647d432064.png)
-
-#### Pairplots
-```
-sns.pairplot(df.dropna(axis=0), hue='Gender', palette='rainbow')
-plt.savefig('pairplot1.png')
-```
-![pairplot1](https://user-images.githubusercontent.com/23128332/41202326-4abe8270-6cd0-11e8-8e0f-62a8c6b7dfa8.png)
-
-
 #### Create a Model column
 ```
 df['Model'] = df['link'].apply(lambda x: x.split('-')[1]+"-"+x.split('-')[2])
@@ -164,6 +131,84 @@ df['Comment'] = df['Comment'].apply(date6_delete)
 raw['Text'] = raw['Location'].fillna('')+' '+raw['CommentTitle'].fillna('')+' '+raw['Comment'].fillna('') \
         +' '+raw['Brand'].fillna('')+' '+raw['Model'].fillna('')+' '+raw['Gender'].fillna('')
 ```
+
+# Descriptive Data Analysis 
+#### Age Distribution
+```
+plt.subplots(figsize=(16,8))
+sns.distplot(df['Age'].dropna(), bins=100)
+plt.savefig('agedist1.png')
+```
+![agedist1](https://user-images.githubusercontent.com/23128332/41202223-84eb53e4-6cce-11e8-8f5c-d97ec50eb828.png)
+
+#### Reviewer Gender Difference
+```
+#http://seaborn.pydata.org/tutorial/color_palettes.html
+plt.subplots(figsize=(10,10))
+sns.countplot(df1['Gender'].dropna(axis=0), palette=sns.xkcd_palette(['windows blue', 'greyish', 'pink']))
+plt.gca().spines['top'].set_visible(False)
+plt.gca().spines['right'].set_visible(False)
+plt.gca().set_facecolor((0.99,0.99,0.99))
+plt.savefig('genderplot1.png')
+```
+Genders were predicted according to reviewers' names. Some names doesn't have different gender attributes on them. They are indicated as 'Unisex' or in other words, unknown gender information.
+![genderplot1](https://user-images.githubusercontent.com/23128332/41202327-4adc5e76-6cd0-11e8-9555-7a7c6f2362f7.png)
+
+#### Brand Ratings According to Genders
+```
+plt.subplots(figsize=(10,10))
+sns.heatmap(pvt, cmap='magma', linecolor='white', linewidths=1)
+plt.savefig('heatgenderrating2.png')
+![heatgenderrating2](https://user-images.githubusercontent.com/23128332/41202224-850c9e82-6cce-11e8-9a94-268f44ef1f04.png)
+```
+#### Brand Ratings 
+```
+plt.subplots(figsize=(16,8))
+plt.xticks(rotation=45)
+sns.barplot(x=df['Brand'], y=df['Rating'], data=df)
+plt.savefig('barplot1.png')
+```
+![barplot1](https://user-images.githubusercontent.com/23128332/41202328-4af929ca-6cd0-11e8-89f0-a0647d432064.png)
+
+#### Pairplots
+```
+sns.pairplot(df.dropna(axis=0), hue='Gender', palette='rainbow')
+plt.savefig('pairplot1.png')
+```
+![pairplot1](https://user-images.githubusercontent.com/23128332/41202326-4abe8270-6cd0-11e8-8e0f-62a8c6b7dfa8.png)
+
+#### Apple Age Segments
+```
+fig, ax = plt.subplots()
+sns.set(style="whitegrid")
+sns.factorplot(x="Age_Segment", data=dage[dage['Brand']=='apple'], kind="count",
+                   palette="rainbow", size=6, aspect=1.5,
+                   order=["12–17","18–24","25–34","35–44","45–54","55–64","65+"],
+              ax=ax)
+fig.set_size_inches(16,8)
+fig.savefig('Apple_AS1')
+```
+
+#### Samsung Age Segments
+```
+fig, ax = plt.subplots()
+sns.set(style="whitegrid")
+sns.factorplot(x="Age_Segment", data=dage[dage['Brand']=='samsung'], kind="count",
+                   palette="rainbow", size=6, aspect=1.5,
+                   order=["12–17","18–24","25–34","35–44","45–54","55–64","65+"],
+              ax=ax)
+fig.set_size_inches(16,8)
+fig.savefig('Samsung_AS1')
+```
+
+#### Unfamous Brands' Age Segmets
+```
+g = sns.factorplot(x="Age_Segment", data=dage[dage['Brand']=='other'], kind="count",
+                   palette="rainbow", size=6, aspect=1.5,
+                   order=["12–17","18–24","25–34","35–44","45–54","55–64","65+"])
+plt.title('Other')
+```
+
 # Vectorization
 ### CountVectorizer
 ```
