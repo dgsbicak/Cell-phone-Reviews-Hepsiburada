@@ -85,7 +85,7 @@ raw['Text'] = raw['Location'].fillna('')+' '+raw['CommentTitle'].fillna('')+' '+
 # Vectorization
 ### CountVectorizer
 ```
-from sklearn.feature_extraction.text import TfidfTransformer, TfidfVectorizer, CountVectorizer
+from sklearn.feature_extraction.text import CountVectorizer
 count_vec = CountVectorizer()
 feature_train_counts = count_vec.fit(raw['Text'])
 bag_of_words = feature_train_counts.transform(raw['Text'])
