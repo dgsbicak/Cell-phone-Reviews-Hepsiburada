@@ -322,5 +322,6 @@ def svc_param_tuning(X, y,pipeline):
     return grid_search.best_params_
 print(svc_param_tuning(feature_train,label_train,pipeline=pipeline))
 
-#Optimum: {'clf__C': 10, 'clf__gamma': 0.01}
+# Optimum: {'clf__C': 10, 'clf__gamma': 0.01}
+# F1 score: 0.74 
 ```
