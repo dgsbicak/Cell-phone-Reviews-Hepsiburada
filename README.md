@@ -247,8 +247,7 @@ print(classification_report(label_test, preds_sgd))
 #log_loss=0.75
 #F1: 0.73
 ```
-![learningCurveSGD](https://user-images.githubusercontent.com/23128332/43603567-f5f1e124-969b-11e8-8f41-2469748cfdee.PNG)
-
+![learningcurvessgd](https://user-images.githubusercontent.com/23128332/43604546-b56f36d0-969e-11e8-9b2e-e10a24dbf7cf.png)
 # Pipeline Method
 ```
 feature_train, feature_test, label_train, label_test = train_test_split(X, y, test_size=0.33, shuffle=True)
