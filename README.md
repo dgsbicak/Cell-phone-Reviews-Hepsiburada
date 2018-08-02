@@ -214,6 +214,7 @@ g = sns.factorplot(x="Age_Segment", data=dage[dage['Brand']=='other'], kind="cou
 plt.title('Other')
 ```
 ![resim](https://user-images.githubusercontent.com/23128332/43580995-f95614d4-965f-11e8-88c2-0115f31942d5.png)
+
 If we assume that every comment indicates the customers who had bought the products, and had left a comment on it afterwards, we can hypothesise the following conclusions:
 People who are in 18-24 and 25-34 age segments more likely to prefer Apple mobile phones instead of buying Samsung mobile phones.
 And people who are in 35-44 age segment are more likely to prefer Samsung mobile phones instead of Apple.
