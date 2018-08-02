@@ -327,7 +327,7 @@ print(svc_param_tuning(feature_train,label_train,pipeline=pipeline))
 ```
 
 # Deep Learning with Keras Framework
-### Making of Generators
+
 ```
 import keras as ks
 from keras.preprocessing.text import Tokenizer
@@ -385,6 +385,70 @@ print(confusion_matrix(y_test_class, y_pred_class))
 print(classification_report(y_test_class, y_pred_class))
 ```
 ```
+Train on 23931 samples, validate on 2659 samples
+Epoch 1/30
+23931/23931 [==============================] - 32s 1ms/step - loss: 1.0325 - acc: 0.6974 - val_loss: 0.8546 - val_acc: 0.7725
+Epoch 2/30
+23931/23931 [==============================] - 21s 894us/step - loss: 0.8893 - acc: 0.7117 - val_loss: 0.7177 - val_acc: 0.7657
+Epoch 3/30
+23931/23931 [==============================] - 21s 882us/step - loss: 0.7396 - acc: 0.7706 - val_loss: 0.8286 - val_acc: 0.7537
+Epoch 4/30
+23931/23931 [==============================] - 21s 886us/step - loss: 0.6587 - acc: 0.7898 - val_loss: 0.6723 - val_acc: 0.7950
+Epoch 5/30
+23931/23931 [==============================] - 21s 879us/step - loss: 0.6086 - acc: 0.8040 - val_loss: 0.6980 - val_acc: 0.7943
+Epoch 6/30
+23931/23931 [==============================] - 21s 881us/step - loss: 0.5571 - acc: 0.8187 - val_loss: 0.6907 - val_acc: 0.7879
+Epoch 7/30
+23931/23931 [==============================] - 21s 885us/step - loss: 0.5430 - acc: 0.8232 - val_loss: 0.7291 - val_acc: 0.7807
+Epoch 8/30
+23931/23931 [==============================] - 21s 880us/step - loss: 0.5240 - acc: 0.8329 - val_loss: 0.7021 - val_acc: 0.7984
+Epoch 9/30
+23931/23931 [==============================] - 21s 880us/step - loss: 0.5315 - acc: 0.8312 - val_loss: 0.7207 - val_acc: 0.7871
+Epoch 10/30
+23931/23931 [==============================] - 23s 973us/step - loss: 0.5089 - acc: 0.8361 - val_loss: 0.7771 - val_acc: 0.7307
+Epoch 11/30
+23931/23931 [==============================] - 24s 993us/step - loss: 0.5165 - acc: 0.8363 - val_loss: 0.7278 - val_acc: 0.7856
+Epoch 12/30
+23931/23931 [==============================] - 27s 1ms/step - loss: 0.5202 - acc: 0.8357 - val_loss: 0.9476 - val_acc: 0.7115
+Epoch 13/30
+23931/23931 [==============================] - 22s 936us/step - loss: 0.5077 - acc: 0.8393 - val_loss: 0.6538 - val_acc: 0.8007
+Epoch 14/30
+23931/23931 [==============================] - 24s 1ms/step - loss: 0.4961 - acc: 0.8403 - val_loss: 0.8810 - val_acc: 0.8074
+Epoch 15/30
+23931/23931 [==============================] - 25s 1ms/step - loss: 0.5007 - acc: 0.8390 - val_loss: 0.7761 - val_acc: 0.8120
+Epoch 16/30
+23931/23931 [==============================] - 22s 929us/step - loss: 0.5075 - acc: 0.8392 - val_loss: 0.7407 - val_acc: 0.8007
+Epoch 17/30
+23931/23931 [==============================] - 23s 975us/step - loss: 0.5176 - acc: 0.8366 - val_loss: 0.8192 - val_acc: 0.7973
+Epoch 18/30
+23931/23931 [==============================] - 23s 952us/step - loss: 0.5030 - acc: 0.8410 - val_loss: 0.7826 - val_acc: 0.8063
+Epoch 19/30
+23931/23931 [==============================] - 23s 971us/step - loss: 0.4903 - acc: 0.8441 - val_loss: 0.7976 - val_acc: 0.7977
+Epoch 20/30
+23931/23931 [==============================] - 25s 1ms/step - loss: 0.4939 - acc: 0.8445 - val_loss: 0.8273 - val_acc: 0.8011
+Epoch 21/30
+23931/23931 [==============================] - 24s 998us/step - loss: 0.4873 - acc: 0.8459 - val_loss: 0.6989 - val_acc: 0.7958
+Epoch 22/30
+23931/23931 [==============================] - 22s 915us/step - loss: 0.4908 - acc: 0.8464 - val_loss: 0.8770 - val_acc: 0.8056
+Epoch 23/30
+23931/23931 [==============================] - 22s 928us/step - loss: 0.4837 - acc: 0.8466 - val_loss: 0.7315 - val_acc: 0.7567
+Epoch 24/30
+23931/23931 [==============================] - 22s 902us/step - loss: 0.4892 - acc: 0.8449 - val_loss: 0.7381 - val_acc: 0.7717
+Epoch 25/30
+23931/23931 [==============================] - 23s 952us/step - loss: 0.4909 - acc: 0.8402 - val_loss: 0.7204 - val_acc: 0.7864
+Epoch 26/30
+23931/23931 [==============================] - 22s 925us/step - loss: 0.4977 - acc: 0.8402 - val_loss: 0.6747 - val_acc: 0.8018
+Epoch 27/30
+23931/23931 [==============================] - 23s 973us/step - loss: 0.4927 - acc: 0.8437 - val_loss: 0.8618 - val_acc: 0.7285
+Epoch 28/30
+23931/23931 [==============================] - 22s 917us/step - loss: 0.5258 - acc: 0.8353 - val_loss: 0.7485 - val_acc: 0.7984
+Epoch 29/30
+23931/23931 [==============================] - 23s 953us/step - loss: 0.4905 - acc: 0.8402 - val_loss: 0.8191 - val_acc: 0.7977
+Epoch 30/30
+23931/23931 [==============================] - 25s 1ms/step - loss: 0.5060 - acc: 0.8371 - val_loss: 0.7801 - val_acc: 0.7868
+Out[12]:
+<keras.callbacks.History at 0x190fdc05978>
+
 [[   24    72    59   121   182]
  [   12    56    31   126   140]
  [   24    93   161   547  1246]
