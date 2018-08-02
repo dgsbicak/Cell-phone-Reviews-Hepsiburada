@@ -178,8 +178,8 @@ plt.savefig('pairplot1.png')
 ```
 ![pairplot1](https://user-images.githubusercontent.com/23128332/41202326-4abe8270-6cd0-11e8-8e0f-62a8c6b7dfa8.png)
 
+
 #### Apple Age Segment Distribution
-![apple_as1](https://user-images.githubusercontent.com/23128332/41435374-47f27254-7027-11e8-9ee1-e91c6b4d7ec3.png)
 ```
 fig, ax = plt.subplots()
 sns.set(style="whitegrid")
@@ -190,9 +190,9 @@ sns.factorplot(x="Age_Segment", data=dage[dage['Brand']=='apple'], kind="count",
 fig.set_size_inches(16,8)
 fig.savefig('Apple_AS1')
 ```
+![apple_as1](https://user-images.githubusercontent.com/23128332/41435374-47f27254-7027-11e8-9ee1-e91c6b4d7ec3.png)
 
 #### Samsung Age Segment Distribution
-![samsung_as1](https://user-images.githubusercontent.com/23128332/41435380-4ab2e51e-7027-11e8-91f7-3cdf7bf9743b.png)
 ```
 fig, ax = plt.subplots()
 sns.set(style="whitegrid")
@@ -203,6 +203,7 @@ sns.factorplot(x="Age_Segment", data=dage[dage['Brand']=='samsung'], kind="count
 fig.set_size_inches(16,8)
 fig.savefig('Samsung_AS1')
 ```
+![samsung_as1](https://user-images.githubusercontent.com/23128332/41435380-4ab2e51e-7027-11e8-91f7-3cdf7bf9743b.png)
 
 #### Unfamous Brands' Age Segmet Distribution
 
